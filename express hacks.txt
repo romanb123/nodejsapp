@@ -79,3 +79,13 @@ render to view engine template:
 or:
     res.render('404',{title:'value of this property'});
 
+=========================================================================================================================================================
+ejs:
+  <% users.forEach(function(user){ %>
+    <%- html template %>
+  <% }); %
+
+
+<%=value from rendering%>
+
+
