@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var path=require('path');
 const bodyParser = require('body-parser');
 var home=require('./routs/home');
 var addproduct=require('./routs/add-product');
@@ -15,8 +16,7 @@ app.use(addproduct.routes);
 app.use(list);
 
 app.use('/', function (req, res,next) {
-    res.send("<h1>no such page</h1>");
+    res.render('404',{title:'page not found'});
 }); 
-
 
 app.listen(3000);

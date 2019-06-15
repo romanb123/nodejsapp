@@ -76,3 +76,6 @@ app.set('views','where to find file with the template');
 render to view engine template:
   res.render('file template name');
 
+or:
+    res.render('404',{title:'value of this property'});
+
