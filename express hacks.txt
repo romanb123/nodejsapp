@@ -1,0 +1,64 @@
+Comments:
+control+k+c
+================================================================================================================================================================
+install nodemon:
+npm install --save-dev nodemon
+=========================================================================================================================================================
+nodemon to package json:
+npm init==>
+then to change in package json:
+"devDependencies": {},
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1",
+"start":"nodemon app.js"
+},
+
+=========================================================================================================================================================
+
+app skelet:
+
+var express = require('express');
+var app = express();
+
+app.use('/URL', function (req, res,next) {
+res.send("<h1>no such page</h1>");
+}); 
+
+app.listen(port number);
+
+=========================================================================================================================================================
+
+router skelet:
+
+var express = require('express');
+const Router=express.Router();
+var path=require("path");
+
+Router.get('/home', function (req, res) {
+res.sendFile(path.join(__dirname,"../home.html"));
+});
+
+module.exports=Router;
+=========================================================================================================================================================
+
+use the router in app:
+var express = require('express');
+var app = express();
+var home=require('./routs/home');
+
+app.use(home);
+
+
+app.use('/', function (req, res,next) {
+res.send("<h1>no such page</h1>");
+}); 
+
+app.listen(3000);
+
+=========================================================================================================================================================
+
+
+form skelet:
+'<form action="/add-product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>'
+
+=========================================================================================================================================================
