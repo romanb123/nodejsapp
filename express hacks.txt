@@ -88,4 +88,14 @@ ejs:
 
 <%=value from rendering%>
 
+=========================================================================================================================================================
+controller example:
+exports.addProduxt2View = (req, res, next) => {
+    res.render('add-product', { title: 'value of this property' });
+};
+
+connect to rout:
+router.get('/add-product', productVewer.addProduxt2View);
+
+
 

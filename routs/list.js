@@ -1,12 +1,9 @@
 var express = require('express');
 const router = express.Router();
-const products = require('./add-product');
+const addItem = require('../controlers/addnew');
 const path = require('path');
 
 
-router.get('/list', function (req, res) {
-  res.render('list', { lists: products.products });
-  console.log("from list", products.products);
-});
+router.get('/list', addItem.addToList);
 
 module.exports = router;
