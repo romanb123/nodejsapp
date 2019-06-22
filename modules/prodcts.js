@@ -8,7 +8,7 @@ module.exports = class Product {
     addToAll() {
         allproducts.push(this);
     }
-    showProducts() {
+    static showProducts() {
         return allproducts;
     }
 

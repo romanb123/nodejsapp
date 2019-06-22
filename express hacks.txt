@@ -97,5 +97,42 @@ exports.addProduxt2View = (req, res, next) => {
 connect to rout:
 router.get('/add-product', productVewer.addProduxt2View);
 
+=========================================================================================================================================================
+module expmple:
 
+allproducts = [];
+module.exports = class Product {
+    constructor(name) {
+        this.title = name;
+    }
 
+    addToAll() {
+        allproducts.push(this);
+    }
+    static showProducts() {
+        return allproducts;
+    }
+}
+=========================================================================================================================================================
+add module to controller:
+
+const Item = require("../modules/prodcts");
+
+exports.addToList = (req, res, next) => {
+    const all = Item.showProducts();
+    res.render('list', { lists: all });
+    console.log("from list", all);
+};
+
+=========================================================================================================================================================
+add module to controller:
+
+const Item = require("../modules/prodcts");
+
+exports.newProd = (req, res, next) => {
+    const newPro = new Item(req.body.product);
+    console.log(req.body.product);
+    newPro.addToAll();
+    console.log(newPro);
+    res.redirect("/list");
+};

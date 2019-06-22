@@ -1,9 +1,10 @@
 const Item = require("../modules/prodcts");
 
 exports.newProd = (req, res, next) => {
-    var newPro = new Item(req.body.title);
+    const newPro = new Item(req.body.product);
+    console.log(req.body.product);
     newPro.addToAll();
-    var allprods = newPro.showProducts();
+    console.log(newPro);
     res.redirect("/list");
 };
 exports.addProduxt2View = (req, res, next) => {
@@ -11,6 +12,7 @@ exports.addProduxt2View = (req, res, next) => {
 };
 
 exports.addToList = (req, res, next) => {
-    res.render('list', { lists: allprods });
-    console.log("from list", allprods);
+    const all = Item.showProducts();
+    res.render('list', { lists: all });
+    console.log("from list", all);
 };
