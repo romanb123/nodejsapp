@@ -136,3 +136,18 @@ exports.newProd = (req, res, next) => {
     console.log(newPro);
     res.redirect("/list");
 };
+=========================================================================================================================================================
+rewrite file skellet:
+
+ var datapath = path.join("data", "data.json");
+
+        fs.readFile(datapath, (err, data) => {
+            let allproducts = [];
+            if (!err) {
+                allproducts = JSON.parse(data);
+            }
+            allproducts.push(this);
+            fs.writeFile(datapath, JSON.stringify(allproducts), (err) => {
+                console.log(err);
+            });
+        });
