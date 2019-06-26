@@ -18,11 +18,19 @@ module.exports = class Product {
             fs.writeFile(datapath, JSON.stringify(allproducts), (err) => {
                 console.log(err);
             });
+            console.log(allproducts);
         });
-        console.log(allproducts);
+
     }
-    static showProducts() {
-        return allproducts;
+    static showProducts(pass) {
+        const datapath = path.join("data", "data.json");
+        fs.readFile(datapath, (err, datafile) => {
+            if (err) {
+                pass([]);
+            }
+            pass(JSON.parse(datafile));
+        });
+
     }
 
 }

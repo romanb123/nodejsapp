@@ -12,7 +12,9 @@ exports.addProduxt2View = (req, res, next) => {
 };
 
 exports.addToList = (req, res, next) => {
-    const all = Item.showProducts();
-    res.render('list', { lists: all });
-    console.log("from list", all);
+    Item.showProducts(w => {
+        res.render('list', { lists: w });
+        console.log("from list", w);
+    });
+
 };

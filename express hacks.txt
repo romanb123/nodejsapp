@@ -151,3 +151,26 @@ rewrite file skellet:
                 console.log(err);
             });
         });
+
+        =========================================================================================================================================================
+        make method heppand after its function example:
+
+        sending the data by argument:
+        ================================
+      static showProducts(datapasser) {
+        const datapath = path.join("data", "data.json");
+        fs.readFile(datapath, (err, datafile) => {
+            if (err) {
+               datapasser([]);
+            }
+            datapasser(JSON.parse(datafile));
+        });
+
+    }
+
+    getting the data by argument:
+    ================================
+      Item.showProducts(datapasser => {
+        res.render('list', { lists: datapasser });
+        console.log("from list", datapasser);
+    });
