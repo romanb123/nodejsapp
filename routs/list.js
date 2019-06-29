@@ -5,5 +5,6 @@ const path = require('path');
 
 
 router.get('/list', addItem.addToList);
+router.get('/list/:productid', addItem.idproduct);
 
 module.exports = router;

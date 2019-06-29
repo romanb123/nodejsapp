@@ -152,7 +152,7 @@ rewrite file skellet:
             });
         });
 
-        =========================================================================================================================================================
+==========================================================================================================================================================
         make method heppand after its function example:
 
         sending the data by argument:
@@ -174,3 +174,31 @@ rewrite file skellet:
         res.render('list', { lists: datapasser });
         console.log("from list", datapasser);
     });
+
+==========================================================================================================================================================
+read data and render it synchronically:
+
+read and send to controller:
+==============================
+   static showProducts() {
+        const datapath = path.join("data", "data.json");
+        let file = fs.readFileSync(datapath, "utf8", (err, datafile) => {
+            if (err) {
+                return [];
+            }
+            return JSON.parse(datafile);
+        });
+        console.log("file       " + JSON.parse(file));
+        return JSON.parse(file);
+
+    }
+
+   get data from mudule and render to view:
+===========================================
+exports.addToList = (req, res, next) => {
+    const ItemsFromFile = Item.showProducts();
+    console.log("rrr " + ItemsFromFile);
+    res.render('list', { we: ItemsFromFile });
+
+};
+
