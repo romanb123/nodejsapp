@@ -1,0 +1,31 @@
+var arr=[];
+
+let wewe1 = function(){
+  return new Promise(function(resolve,reject){
+    arr.push("dfdf");
+        resolve(' wewe1');
+ });
+};
+
+let wewe2 = function(){
+  return new Promise(function(resolve,reject){
+    arr.push("32");
+        resolve('wewe2');
+ });
+};
+
+let wewe3 = function(){
+  return new Promise(function(resolve,reject){
+    arr.push("43");
+        resolve('wewe3');
+ });
+};
+
+wewe1().then(function(result){
+  return wewe2(result);
+}).then(function(result){
+  return wewe3(result);
+}).then(function(){
+  console.log(arr);
+});
+
