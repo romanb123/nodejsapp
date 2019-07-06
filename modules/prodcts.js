@@ -1,40 +1,23 @@
 var fs = require('fs');
 var path = require('path');
+var database = require('../sql-connect/sql-connect');
 
 module.exports = class Product {
-    constructor(name, id) {
-        this.title = name;
+    constructor(id, title, price, description) {
         this.id = id;
+        this.title = title;
+        this.price = price;
+        this.description = description;
     }
 
     addToAll() {
-        var datapath = path.join("data", "data.json");
-        fs.readFile(datapath, (err, data) => {
-            let allproducts = [];
-            if (!err) {
-                allproducts = JSON.parse(data);
-            }
-            allproducts.push(this);
-            fs.writeFile(datapath, JSON.stringify(allproducts), (err) => {
-                console.log(err);
-            });
-            console.log(allproducts);
-        });
-
+        return database.execute('INSERT INTO products (id,title,price,description) VALUES (?,?,?,?)',
+            [this.id, this.title, this.price, this.description]
+        );
     }
     static showProducts() {
-        const datapath = path.join("data", "data.json");
-        let file = fs.readFileSync(datapath, "utf8", (err, datafile) => {
-            if (err) {
-                return [];
-            }
-            return JSON.parse(datafile);
-        });
-        console.log("file       " + JSON.parse(file));
-        return file;
-
+        return database.execute('SELECT * FROM products');
     }
-
     static showOnePronuct(thisid) {
         const datapath = path.join("data", "data.json");
         var tt = fs.readFileSync(datapath, "utf8", (err, datafile) => {

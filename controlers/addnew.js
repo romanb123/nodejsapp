@@ -1,13 +1,14 @@
 const Item = require("../modules/prodcts");
 
 exports.newProd = (req, res, next) => {
-    const newPro = new Item(req.body.product, req.body.id);
-    console.log(req.body.product);
-    console.log(req.body.id);
-    newPro.addToAll(req.body.id);
+    const newPro = new Item(null, req.body.title, req.body.price, req.body.description);
     console.log(newPro);
-    console.log("item:  " + Item);
-    res.redirect("/list");
+    newPro.addToAll().then(() => {
+        res.redirect("/list");
+    }).catch(err => {
+        console.log(err);
+    });
+
 };
 exports.idproduct = (req, res, next) => {
     const isd = req.params.productid;
@@ -21,7 +22,8 @@ exports.addProduxt2View = (req, res, next) => {
 };
 
 exports.addToList = (req, res, next) => {
-    const ItemsFromFile = Item.showProducts();
-    console.log("rrr " + ItemsFromFile);
-    res.render('list', { we: JSON.parse(ItemsFromFile) });
+    Item.showProducts().then((e) => {
+        console.log(e[0]);
+        res.render('list', { we: e[0] });
+    });
 };

@@ -202,3 +202,53 @@ exports.addToList = (req, res, next) => {
 
 };
 
+==========================================================================================================================================================
+get data from mysql:
+
+sql file:
+==============================
+var mysql = require('mysql2');
+var connection = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    database: 'node-app',
+    password: 'qwert%$#@!'
+});
+
+module.exports = connection.promise();
+
+*********************************************************
+use the sql module:
+
+var database = require('../sql-connect/sql-connect');
+
+   static showProducts() {
+        return database.execute('SELECT * FROM products');
+    }
+
+ *********************************************************
+ working with the data we get from mysql:
+
+ exports.addToList = (req, res, next) => {
+    Item.showProducts().then((e) => {
+        console.log(e[0]);
+        res.render('list', { we: e[0] });
+    });
+};   
+==========================================================================================================================================================
+to add values to database:
+    addToAll() {
+        return database.execute('INSERT INTO products (id,title,price,description) VALUES (?,?,?,?)',
+            [this.id, this.title, this.price, this.description]
+        );
+
+================================
+      console.log(newPro);
+    newPro.addToAll().then(() => {
+        res.redirect("/list");
+    }).catch(err => {
+        console.log(err);
+    });      
+
+
+==========================================================================================================================================================
